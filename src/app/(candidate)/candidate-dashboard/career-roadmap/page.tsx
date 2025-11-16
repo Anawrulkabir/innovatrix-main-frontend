@@ -9,13 +9,9 @@ import {
   ArrowRight,
   AlertCircle,
   Rocket,
-  TrendingUp,
   Target,
   Clock,
-  Calendar,
   CheckCircle2,
-  XCircle,
-  ChevronRight,
   BookOpen,
   Award,
   Briefcase,
@@ -37,12 +33,6 @@ type SkillGap = {
   description?: string;
 };
 
-type RoadmapPhase = {
-  phase: string;
-  duration: string;
-  milestones: string[];
-  skills: string[];
-};
 
 type SkillGapAnalysis = {
   currentSkills: string[];
@@ -352,18 +342,6 @@ export default function CareerRoadmapPage() {
     }
   };
 
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case "high":
-        return "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300 border-red-200 dark:border-red-800";
-      case "medium":
-        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800";
-      case "low":
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 border-blue-200 dark:border-blue-800";
-      default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300 border-gray-200 dark:border-gray-800";
-    }
-  };
 
   const fetchYouTubeVideos = async (topic: string) => {
     // Check if videos are already loaded
@@ -547,7 +525,7 @@ export default function CareerRoadmapPage() {
       yPosition += 8;
 
       // Phase Topics
-      phase.forEach((topic, topicIndex) => {
+      phase.forEach((topic) => {
         checkPageBreak(10);
         doc.setFontSize(10);
         doc.setFont("helvetica", "normal");
@@ -875,7 +853,7 @@ export default function CareerRoadmapPage() {
                   <div className="space-y-4">
                     <div className="p-4 rounded-lg bg-purple-50 dark:bg-purple-900/10 border border-purple-200 dark:border-purple-800">
                       <p className="text-sm text-purple-800 dark:text-purple-200">
-                        Now that you've analyzed your skills, create a personalized roadmap with a custom timeframe.
+                        Now that you&apos;ve analyzed your skills, create a personalized roadmap with a custom timeframe.
                       </p>
                     </div>
                     <Button
@@ -1147,6 +1125,7 @@ export default function CareerRoadmapPage() {
                                                   >
                                                     <div className="flex items-start gap-3">
                                                       {video.img_src ? (
+                                                        // eslint-disable-next-line @next/next/no-img-element
                                                         <img
                                                           src={video.img_src}
                                                           alt={video.title}

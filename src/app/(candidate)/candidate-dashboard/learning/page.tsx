@@ -90,8 +90,9 @@ export default function LearningPage() {
 
         setResources(data || []);
         setTotalCount(count || 0);
-      } catch (err: any) {
-        setError(err.message || "Failed to fetch learning resources");
+      } catch (err: unknown) {
+        const error = err as Error;
+        setError(error.message || "Failed to fetch learning resources");
         console.error("Error fetching resources:", err);
       } finally {
         setLoading(false);

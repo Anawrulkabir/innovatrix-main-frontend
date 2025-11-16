@@ -48,28 +48,6 @@ interface ExternalJob {
   external_platform?: string;
 }
 
-interface ExternalJobsResponse {
-  jobs: ExternalJob[];
-  platform_links?: {
-    platform_name: string;
-  };
-  stats?: {
-    returned: number;
-    total: number;
-    by_source?: {
-      adzuna?: number;
-      jsearch?: number;
-      remotive?: number;
-      themuse?: number;
-    };
-  };
-  query_log?: {
-    query: string;
-    location: string;
-    timestamp: string;
-    success: boolean;
-  };
-}
 
 const ITEMS_PER_PAGE = 10;
 
@@ -160,8 +138,9 @@ export default function JobsPage() {
 
       setExternalJobs(data.jobs || []);
       setExternalTotalCount(data.total || data.jobs?.length || 0);
-    } catch (err: any) {
-      const errorMessage = err.message || 'Failed to fetch external jobs';
+    } catch (err: unknown) {
+      const error = err as Error;
+      const errorMessage = error.message || 'Failed to fetch external jobs';
       console.error('Error fetching external jobs:', err);
       setExternalError(`External API Error: ${errorMessage}`);
       setExternalJobs([]);
@@ -264,8 +243,9 @@ export default function JobsPage() {
 
         setJobs(data || []);
         setTotalCount(count || 0);
-      } catch (err: any) {
-        setError(err.message || "Failed to fetch jobs");
+      } catch (err: unknown) {
+        const error = err as Error;
+        setError(error.message || "Failed to fetch jobs");
         console.error("Error fetching jobs:", err);
       } finally {
         setLoading(false);
@@ -594,6 +574,7 @@ export default function JobsPage() {
                     <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                       <div className="flex-1 flex gap-3">
                         {job.company_logo && (
+                          // eslint-disable-next-line @next/next/no-img-element
                           <img
                             src={job.company_logo}
                             alt={job.company}
@@ -769,7 +750,7 @@ export default function JobsPage() {
                                   This job is from {externalJob.source || externalJob.external_platform || 'an external platform'}
                                 </p>
                                 <p className="text-xs text-emerald-600 mt-1">
-                                  Click "Apply on External Site" to apply directly on their platform
+                                  Click &quot;Apply on External Site&quot; to apply directly on their platform
                                 </p>
                               </div>
                               <Button

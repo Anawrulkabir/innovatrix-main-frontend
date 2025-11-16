@@ -2,7 +2,6 @@
 
 import { useState, useCallback } from 'react';
 import { ResumeEnhancementService } from '@/lib/resume/openai-service';
-import { ResumeParser } from '@/lib/resume/parser';
 import { EnhancedResume, ResumeEnhancementResult } from '@/lib/resume/types';
 
 interface UseResumeBuilderProps {
@@ -23,7 +22,7 @@ export function useResumeBuilder({
   const [enhancementResult, setEnhancementResult] = useState<ResumeEnhancementResult | null>(null);
   const [currentStep, setCurrentStep] = useState<string>('');
 
-  const enhanceResume = useCallback(async (userData: any) => {
+  const enhanceResume = useCallback(async (userData: { resumeContext?: string; full_name?: string; education_level?: string; department?: string; experience_level?: string; preferred_career_track?: string }) => {
     try {
       setIsProcessing(true);
       setCurrentStep('Fetching resume context from database...');

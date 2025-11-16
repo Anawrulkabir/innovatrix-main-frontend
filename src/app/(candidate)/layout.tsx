@@ -14,8 +14,6 @@ import {
   User,
   Sun,
   Moon,
-  PanelLeftClose, // <-- ADDED
-  PanelRightClose,
   Book, // <-- ADDED
   MessageCircle,
 } from "lucide-react";
@@ -310,6 +308,7 @@ export default function CandidateLayout({
               title="View Profile"
             >
               <div className="relative flex-shrink-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   className="h-8 w-8 rounded-lg object-cover border-2 border-emerald-200 group-hover:border-emerald-300 transition-colors"
                   src="https://placehold.co/100x100/10b981/ffffff?text=U"

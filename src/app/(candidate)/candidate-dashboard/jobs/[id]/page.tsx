@@ -63,8 +63,9 @@ export default function JobDetailsPage() {
         }
 
         setJob(data);
-      } catch (err: any) {
-        setError(err.message || "Failed to fetch job details");
+      } catch (err: unknown) {
+        const error = err as Error;
+        setError(error.message || "Failed to fetch job details");
         console.error("Error fetching job:", err);
       } finally {
         setLoading(false);
@@ -167,9 +168,10 @@ export default function JobDetailsPage() {
 
       const data = await response.json();
       setMatchResult(data);
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const error = err as Error;
       console.error("Error matching job:", err);
-      setMatchError(err.message || "Failed to analyze job match. Please try again.");
+      setMatchError(error.message || "Failed to analyze job match. Please try again.");
     } finally {
       setIsMatching(false);
     }

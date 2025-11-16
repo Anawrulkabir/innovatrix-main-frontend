@@ -34,6 +34,9 @@ function genId() {
 
 type ActionType = typeof actionTypes
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const _actionTypes = actionTypes;
+
 type Action =
   | {
       type: ActionType["ADD_TOAST"]

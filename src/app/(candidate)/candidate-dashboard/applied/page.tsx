@@ -157,7 +157,7 @@ export default function MyApplicationsPage() {
               No applications found
             </h3>
             <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-              You haven't applied for any jobs in this category yet.
+              You haven&apos;t applied for any jobs in this category yet.
             </p>
             <div className="mt-6">
               <Link

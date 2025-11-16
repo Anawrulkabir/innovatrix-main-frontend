@@ -102,7 +102,7 @@ function CodeBlock({ children, className }: CodeBlockProps) {
     </div>
   );
 }
-const ChatMessage = ({ type, content }: { type: any; content: any }) => {
+const ChatMessage = ({ type, content }: { type: "user" | "ai"; content: string }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -149,7 +149,7 @@ const ChatMessage = ({ type, content }: { type: any; content: any }) => {
                 rehypePlugins={[rehypeKatex]}
                 components={{
                   pre: ({ children }) => <>{children}</>,
-                  code: ({ node, className, children, ...props }) => {
+                  code: ({ className, children, ...props }) => {
                     const match = /language-(\w+)/.exec(className || '');
                     const isInline = !className?.includes('language-');
                     if (className?.includes('math')) {
@@ -433,7 +433,7 @@ export default function CandidateProfilePage() {
           Profile not ready
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
-          We couldn't find your profile yet. Please complete your onboarding or contact support if you believe this is a mistake.
+          We couldn&apos;t find your profile yet. Please complete your onboarding or contact support if you believe this is a mistake.
         </p>
         <Button asChild>
           <Link href="/candidate-dashboard/profile/edit">Complete profile</Link>
@@ -661,7 +661,7 @@ export default function CandidateProfilePage() {
                         rehypePlugins={[rehypeKatex]}
                         components={{
                           pre: ({ children }) => <>{children}</>,
-                          code: ({ node, className, children, ...props }) => {
+                          code: ({ className, children, ...props }) => {
                             const match = /language-(\w+)/.exec(className || "");
                             const isInline = !className?.includes("language-");
                             if (className?.includes("math")) {

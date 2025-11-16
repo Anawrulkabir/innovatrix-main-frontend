@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import clsx from 'clsx';
 import { Button } from "@/components/ui/button";
-import { ArrowUp, CornerDownRight, Send } from "lucide-react";
+import { CornerDownRight, Send } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 
@@ -13,7 +13,7 @@ import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
 import "katex/dist/katex.min.css";
-import { Bot, User, Copy, Check, ThumbsUp, ThumbsDown, Maximize2 } from 'lucide-react';
+import { Bot, User, Copy, Check } from 'lucide-react';
 import { toast } from "@/hooks/use-toast";
 import { Textarea } from "./ui/textarea";
 type Props = {
@@ -23,9 +23,6 @@ type Props = {
 };
 interface Message {
   type: "ai" | "user";
-  content: string;
-}
-interface MarkdownStreamerProps {
   content: string;
 }
 interface CodeBlockProps {
@@ -68,7 +65,7 @@ function CodeBlock({ children, className }: CodeBlockProps) {
     </div>
   );
 }
-const ChatMessage = ({ type, content }: { type: any; content: any }) => {
+const ChatMessage = ({ type, content }: { type: "user" | "ai"; content: string }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -118,7 +115,7 @@ const ChatMessage = ({ type, content }: { type: any; content: any }) => {
                 rehypePlugins={[rehypeKatex]}
                 components={{
                   pre: ({ children }) => <>{children}</>,
-                  code: ({ node, className, children, ...props }) => {
+                  code: ({ className, children, ...props }) => {
                     const match = /language-(\w+)/.exec(className || '');
                     const isInline = !className?.includes('language-');
                     if (className?.includes('math')) {
@@ -283,7 +280,7 @@ const ProfessionalAIChatScreen = ({ unique_id, content, resume_context }: Props)
         }
         // simulateStreamingResponse(aiResponse);
       }
-    } catch (e) {
+    } catch {
       setIsLoading(false);
       toast({
         title: "Sorry",
@@ -332,7 +329,7 @@ const ProfessionalAIChatScreen = ({ unique_id, content, resume_context }: Props)
                     Welcome to AI Chat!
                   </h2>
                   <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
-                    I'm here to help you with any questions. Ask me anything, and I'll do my best to assist you!
+                    I&apos;m here to help you with any questions. Ask me anything, and I&apos;ll do my best to assist you!
                   </p>
                 </div>
 

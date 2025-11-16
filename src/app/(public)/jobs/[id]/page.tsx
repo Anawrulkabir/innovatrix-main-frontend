@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { createSupabaseClientSide } from "@/lib/supabase/supabase-client-side";
@@ -79,8 +79,9 @@ export default function JobDetailsPage() {
           } else {
             throw new Error("External job data not found");
           }
-        } catch (err: any) {
-          setError(err.message || "Failed to fetch external job details");
+        } catch (err: unknown) {
+          const error = err as Error;
+          setError(error.message || "Failed to fetch external job details");
           console.error("Error fetching external job:", err);
         } finally {
           setLoading(false);
@@ -99,8 +100,9 @@ export default function JobDetailsPage() {
           }
 
           setJob(data);
-        } catch (err: any) {
-          setError(err.message || "Failed to fetch job details");
+        } catch (err: unknown) {
+          const error = err as Error;
+          setError(error.message || "Failed to fetch job details");
           console.error("Error fetching job:", err);
         } finally {
           setLoading(false);

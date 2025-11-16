@@ -329,7 +329,7 @@ export default function LandingPage() {
                     </div>
                   </div>
                   <p className="text-slate-600 italic leading-relaxed">
-                    "ECOINTERVIEW connected me with my dream role at a B-Corp working on carbon capture technology. The focus on mission-driven careers made all the difference."
+                    &quot;ECOINTERVIEW connected me with my dream role at a B-Corp working on carbon capture technology. The focus on mission-driven careers made all the difference.&quot;
                   </p>
                   <div className="flex gap-1">
                     {[...Array(5)].map((_, i) => (

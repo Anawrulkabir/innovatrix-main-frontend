@@ -87,7 +87,7 @@ export default function AdminSigninPage() {
             setIsSubmitting(false)
             return
           }
-        } catch (e) {
+        } catch {
           // Fallback to router if window check fails
         }
       }

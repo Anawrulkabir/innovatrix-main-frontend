@@ -129,8 +129,8 @@ export class ResumeParser {
         
         // Better text extraction with positioning
         const textItems = textContent.items
-          .filter((item: any) => item.str && item.str.trim())
-          .sort((a: any, b: any) => {
+          .filter((item: { str?: string }) => item.str && item.str.trim())
+          .sort((a: { transform: number[] }, b: { transform: number[] }) => {
             // Sort by Y position (top to bottom), then X position (left to right)
             const yDiff = b.transform[5] - a.transform[5];
             if (Math.abs(yDiff) > 5) return yDiff > 0 ? 1 : -1;
@@ -270,7 +270,7 @@ export class ResumeParser {
         const textContent = await page.getTextContent();
         
         // Sort items by position for better text flow
-        const items = textContent.items.sort((a: any, b: any) => {
+        const items = textContent.items.sort((a: { transform: number[] }, b: { transform: number[] }) => {
           if (Math.abs(a.transform[5] - b.transform[5]) > 5) {
             return b.transform[5] - a.transform[5]; // Sort by Y position (top to bottom)
           }

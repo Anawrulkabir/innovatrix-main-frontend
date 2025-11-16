@@ -451,7 +451,7 @@ Guidelines:
     }
   }
 
-  private createFallbackEnhancement(originalResponse: string): {
+  private createFallbackEnhancement(_originalResponse: string): {
     resume: EnhancedResume;
     improvements: string[];
     score: number;
